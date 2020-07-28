@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">DUResources</string>
+    <string-array name="sections">
+        <item>Book Robot</item>
+        <item>GD PI Section</item>
+        <item>Notes</item>
+        <item>Blogs</item>
+        <item>Suggested Reading Material</item>
+    </string-array>
+</resources>

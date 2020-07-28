@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "659441405226",
+    "firebase_url": "https://duresources-becbc.firebaseio.com",
+    "project_id": "duresources-becbc",
+    "storage_bucket": "duresources-becbc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:659441405226:android:6f703aa46bb0de5060e253",
+        "android_client_info": {
+          "package_name": "com.example.duresources"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "659441405226-3mf990cihmrfinm2hpmbfjveu5hiov12.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCk9CDujXeAhJRhNEfA6vS7bGmUsFXM7Mo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "659441405226-3mf990cihmrfinm2hpmbfjveu5hiov12.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
