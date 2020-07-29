@@ -22,7 +22,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     EditText usernameText ;
     EditText numberText ;
     EditText passwordText ;
-
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
 
@@ -123,6 +122,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             case R.id.button2:
                 userSignUp();
                 break;
+            case R.id.button4:
+                //TODO
         }
     }
 
