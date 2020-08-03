@@ -40,6 +40,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         findViewById(R.id.textView2).setOnClickListener(this);
         findViewById(R.id.button2).setOnClickListener(this);
+        findViewById(R.id.button4).setOnClickListener(this);
 
     }
 
@@ -111,6 +112,69 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         Toast.makeText(getApplicationContext(), "Registered", Toast.LENGTH_SHORT).show();
         startActivity(new Intent(this, MainActivity.class));
     }
+    private void generateSudoPassword() {
+        final String email = emailText.getText().toString();
+        String username = usernameText.getText().toString();
+        String phNum = numberText.getText().toString();
+        String password = passwordText.getText().toString();
+
+        // Validation
+        if(email.isEmpty()){
+            emailText.setError("Email required");
+            emailText.requestFocus();
+            return;
+        }
+
+        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            emailText.setError("Please enter a valid email");
+            emailText.requestFocus();
+            return;
+        }
+
+        if(password.isEmpty()){
+            passwordText.setError("Password required");
+            passwordText.requestFocus();
+            return;
+        }
+
+        if(username.isEmpty()){
+            usernameText.setError("Username required");
+            usernameText.requestFocus();
+            return;
+        }
+
+        if(phNum.isEmpty()){
+            numberText.setError("Number required");
+            numberText.requestFocus();
+            return;
+        }else if(phNum.length() != 10){
+            numberText.setError("Enter valid number");
+            numberText.requestFocus();
+            return;
+        }
+
+        SignUpData user = new SignUpData(username, phNum, email, password);
+
+        // checking if the user already exists
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    SignUpData user = dataSnapshot.getValue(SignUpData.class);
+                    if(user != null && user.get_email().equals(email)){
+                        clearFields();
+                        Toast.makeText(getApplicationContext(), "e-mail already exists try to login", Toast.LENGTH_SHORT).show();
+                        return ;
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+
+    }
 
     @Override
     public void onClick(View view) {
@@ -123,9 +187,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 userSignUp();
                 break;
             case R.id.button4:
-                //TODO
+                
+                generateSudoPassword();
+                break;
         }
     }
+
+
 
     private void clearFields(){
         emailText.setText("");
