@@ -24,7 +24,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     EditText passwordText ;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
-
+    String checkPassword;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,11 +106,15 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
-
-        databaseReference.child(email.replace(".","")).setValue(user);
-        clearFields();
-        Toast.makeText(getApplicationContext(), "Registered", Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(this, MainActivity.class));
+        if(user.get_password().equals(checkPassword)) {
+            databaseReference.child(email.replace(".", "")).setValue(user);
+            clearFields();
+            Toast.makeText(getApplicationContext(), "Registered", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, HomeActivity.class));
+        }
+        else{
+            Toast.makeText(getApplicationContext(), "Wrong Password!! Please Check your E-mail.", Toast.LENGTH_SHORT).show();
+        }
     }
     private void generateSudoPassword() {
         final String email = emailText.getText().toString();
@@ -131,11 +135,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             return;
         }
 
-        if(password.isEmpty()){
+        /*if(password.isEmpty()){
             passwordText.setError("Password required");
             passwordText.requestFocus();
             return;
-        }
+        }*/
 
         if(username.isEmpty()){
             usernameText.setError("Username required");
@@ -153,7 +157,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             return;
         }
 
-        SignUpData user = new SignUpData(username, phNum, email, password);
+        //SignUpData user = new SignUpData(username, phNum, email, password);
 
         // checking if the user already exists
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -173,6 +177,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
+        PasswordGenerator sudoPassword=new PasswordGenerator();
+        checkPassword=sudoPassword.generate();
+        sendPassToEmail();
 
     }
 
@@ -189,11 +196,21 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             case R.id.button4:
                 
                 generateSudoPassword();
+
                 break;
         }
     }
 
+    private void sendPassToEmail(){
+        String mail=emailText.getText().toString();
+        String message="Your Password for registration is:\n"+checkPassword;
+        String subject="Randomly Generated Registration Password";
 
+        //Send Email
+        JavaMailAPI javaMailAPI=new JavaMailAPI(this,mail,subject,message);
+        javaMailAPI.execute();
+
+    }
 
     private void clearFields(){
         emailText.setText("");
