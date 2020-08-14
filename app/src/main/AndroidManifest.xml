@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SuggestedReadingsActivity"></activity>
+        <activity android:name=".WriteBlog"></activity>
+        <activity android:name=".SuggestedReadingsActivity" />
         <activity android:name=".NotesActivity" />
         <activity android:name=".GDPIActivity" />
         <activity android:name=".BookRobotActivity" />
