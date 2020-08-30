@@ -19,7 +19,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    EditText emailEditText ;
+    static EditText emailEditText ;
     EditText passwordEditText ;
 
     FirebaseDatabase firebaseDatabase;
@@ -40,7 +40,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.textView).setOnClickListener(this);
         findViewById(R.id.button).setOnClickListener(this);
     }
-
+    public static String getEmail(){
+        return emailEditText.getText().toString().trim();
+    }
     private void userLogin(){
         final String email = emailEditText.getText().toString().trim();
         final String password = passwordEditText.getText().toString().trim();
