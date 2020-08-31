@@ -205,9 +205,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         String mail=emailText.getText().toString();
         String message="Your Password for registration is:\n"+checkPassword;
         String subject="Randomly Generated Registration Password";
-
+        String function="Password sent to ";
         //Send Email
-        JavaMailAPI javaMailAPI=new JavaMailAPI(this,mail,subject,message);
+        JavaMailAPI javaMailAPI=new JavaMailAPI(this,mail,subject,message,function);
         javaMailAPI.execute();
 
     }

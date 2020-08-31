@@ -25,7 +25,7 @@ public class JavaMailAPI extends AsyncTask<Void,Void,Void>  {
     //Variables
     private Context mContext;
     private Session mSession;
-
+    private String mFunction;
     private String mEmail;
     private String mSubject;
     private String mMessage;
@@ -33,11 +33,12 @@ public class JavaMailAPI extends AsyncTask<Void,Void,Void>  {
     private ProgressDialog mProgressDialog;
 
     //Constructor
-    public JavaMailAPI(Context mContext, String mEmail, String mSubject, String mMessage) {
+    public JavaMailAPI(Context mContext, String mEmail, String mSubject, String mMessage,String mFunction) {
         this.mContext = mContext;
         this.mEmail = mEmail;
         this.mSubject = mSubject;
         this.mMessage = mMessage;
+        this.mFunction= mFunction;
     }
 
     @Override
@@ -54,7 +55,7 @@ public class JavaMailAPI extends AsyncTask<Void,Void,Void>  {
         mProgressDialog.dismiss();
 
         //Show success toast
-        Toast.makeText(mContext,"Password Sent To "+mEmail,Toast.LENGTH_SHORT).show();
+        Toast.makeText(mContext,mFunction+mEmail,Toast.LENGTH_SHORT).show();
     }
 
     @Override

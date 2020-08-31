@@ -7,4 +7,13 @@
         <item>Blogs</item>
         <item>Suggested Reading Material</item>
     </string-array>
+    <!--<string name="app_name">DUResources</string>-->
+    <string-array name="genre">
+        <item>Politics</item>
+        <item>Innovation</item>
+        <item>Philosophy</item>
+        <item>Creative</item>
+        <item>Inspiring</item>
+    </string-array>
+
 </resources>
